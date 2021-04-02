@@ -1,0 +1,48 @@
+<html><body><h1>It works!</h1>
+<!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
+<div id="__8x8-chat-button-container-script_10018922085f2c07c79fd971.19895158"></div>
+<div><br></div>
+<div>
+<input type="text" name="person" id="person"></input>
+
+<button id="submit-btn">Submit</button>
+</div>
+<!-- This script will not interfere with the button layout, you just need to include it in the same page. It must also be within the <body> section of the page, preferably just before the ending tag. -->
+<script type="text/javascript">
+var message_bus;
+var submitBtn = document.querySelector("#submit-btn");
+console.log(submitBtn);
+    window.__8x8Chat = {
+        uuid: "script_10018922085f2c07c79fd971.19895158",
+        tenant: "Z3JhbnRzdHJlZXRncm91cGkyNjMwMQ",
+        channel: "Chat test",
+        domain: "https://vcc-na28.8x8.com",
+        path: "/.",
+        buttonContainerId: "__8x8-chat-button-container-script_10018922085f2c07c79fd971.19895158",
+        align: "right",
+        onInit: function(bus) {
+            message_bus = bus;
+	}
+    };
+
+    (function() {
+        var se = document.createElement("script");
+        se.type = "text/javascript";
+        se.async = true;
+        se.src = window.__8x8Chat.domain + window.__8x8Chat.path + "/CHAT/common/js/chat.js";
+
+        var os = document.getElementsByTagName("script")[0];
+        os.parentNode.insertBefore(se, os);
+    })();
+
+submitBtn.addEventListener("click", () => {
+message_bus.publish("customer:set-info", {
+      "First name": "John"
+});
+message_bus.subscribe("customer:info-sent", function(data) {
+      console.log(data);
+});
+console.log("Button Clicked!");
+})
+</script>
+</body></html>
