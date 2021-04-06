@@ -64,7 +64,7 @@ div table {
 <ul style="type="disc">
     <li>Well, you can try calling us at 412-555-1212</li>
 	-----
-    <li>AND, if you <b><i>REALLY</i></b> need to, try chatting with us <a href="https://google.com">here</a>.</li>
+    <li>AND, if you <b><i>REALLY</i></b> need to, try chatting with us <button id="submit-btn">here</button>.</li>
     </li>
 </ul>
 </p>
@@ -72,6 +72,48 @@ div table {
 </tr>
 </table>
 </div>
+<!--
+<div id="__8x8-chat-button-container-script_10018922085f2c07c79fd971.19895158"></div>
+-->
 </main>
+<script type="text/javascript">
+var message_bus;
+var submitBtn = document.querySelector("#submit-btn");
+console.log(submitBtn);
+    window.__8x8Chat = {
+        uuid: "script_10018922085f2c07c79fd971.19895158",
+        tenant: "Z3JhbnRzdHJlZXRncm91cGkyNjMwMQ",
+        channel: "Chat test",
+        domain: "https://vcc-na28.8x8.com",
+        path: "/.",
+        buttonContainerId: "__8x8-chat-button-container-script_10018922085f2c07c79fd971.19895158",
+        align: "right",
+        onInit: function(bus) {
+            message_bus = bus;
+        }
+    };
+
+    (function() {
+        var se = document.createElement("script");
+        se.type = "text/javascript";
+        se.async = true;
+        se.src = window.__8x8Chat.domain + window.__8x8Chat.path + "/CHAT/common/js/chat.js";
+
+        var os = document.getElementsByTagName("script")[0];
+        os.parentNode.insertBefore(se, os);
+    })();
+
+submitBtn.addEventListener("click", () => {
+message_bus.publish("chat:trigger-chat-window");
+message_bus.publish("customer:set-info", {
+      "First name": "Franck",
+      "Payment": "https://payment-express.net/c/-/payments/receipt/49509012949"
+});
+message_bus.subscribe("customer:info-sent", function(data) {
+      console.log(data);
+});
+console.log("Button Clicked!");
+})
+</script>
 </body>
 </html>
