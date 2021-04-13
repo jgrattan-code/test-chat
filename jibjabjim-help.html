@@ -106,8 +106,7 @@ console.log(submitBtn);
 submitBtn.addEventListener("click", () => {
 message_bus.publish("chat:trigger-chat-window");
 message_bus.publish("customer:set-info", {
-      "First name": "Franck",
-      "Payment": "https://payment-express.net/c/-/payments/receipt/49509012949"
+      "First name": "Franck"
 });
 message_bus.subscribe("customer:info-sent", function(data) {
       console.log(data);
