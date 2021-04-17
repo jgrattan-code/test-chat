@@ -7,15 +7,15 @@ bus.publish("chat:enable-proxy");
 bus.subscribe("customer:message-received", function(data) {
 
       data.message += " (modified)";
-      bus.publish("customer:send-message", data.message);
+      bus.publish("customer:send-message", data);
   });
-	console.log(data.message);
+	console.log(data);
 
 
 bus.subscribe("agent:message-received", function(data) {
 
-      data.message += " (modified)";
-      bus.publish("agent:send-message", data.message);
+      data.message += " Says Jimmy";
+      bus.publish("agent:send-message", data);
   });
          }
      };
