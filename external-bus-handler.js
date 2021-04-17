@@ -2,13 +2,19 @@
  (function(root) {
      root.__8x8Chat = {
          onInit: function(bus) {
-bus.publish("chat:disable-proxy");
+bus.publish("chat:enable-proxy");
+
 bus.subscribe("customer:message-received", function(data) {
-console.log(data.message);
-      // data.message contains the customer message, and data.id
-      // the message ID to be sent back when proxying
+
+      data.message += " (modified)";
+      bus.publish("customer:send-message", data);
   });
 
+bus.subscribe("agent:message-received", function(data) {
+
+      data.message += " (modified)";
+      bus.publish("agent:send-message", data);
+  });
          }
      };
  })(this);
