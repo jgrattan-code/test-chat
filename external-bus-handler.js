@@ -8,14 +8,19 @@ bus.subscribe("customer:message-received", function(data) {
 
       data.message += " (modified)";
       bus.publish("customer:send-message", data);
-  });
-	console.log(data);
+console.log(data);
+console.log(data.message);
+console.log(data.id);
+});
 
 
 bus.subscribe("agent:message-received", function(data) {
 
       data.message += " Says Jimmy";
       bus.publish("agent:send-message", data);
+console.log(data);
+console.log(data.message);
+console.log(data.id);
   });
          }
      };
