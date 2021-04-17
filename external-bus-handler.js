@@ -9,6 +9,8 @@ bus.subscribe("customer:message-received", function(data) {
       data.message += " (modified)";
       bus.publish("customer:send-message", data.message);
   });
+	console.log(data.message);
+
 
 bus.subscribe("agent:message-received", function(data) {
 
